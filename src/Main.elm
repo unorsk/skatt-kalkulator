@@ -124,6 +124,9 @@ pensionShare71to12 : Float -> Float
 pensionShare71to12 salary =
  if (salary > (7.1 * g)) then ( ( (Basics.min (12 * g) salary) - (7.1 * g)) * 0.08 * employeeTax) else 0.0
 
+divider : Html Msg
+divider = div [class "divider"] []
+
 view : Model -> Html Msg
 view model =
   let
@@ -141,6 +144,7 @@ view model =
     , field "Timepris:" (input [type_ "number", placeholder "Timepris", value (String.fromInt model.hourPrice), onInput UpdateHourPrice] [])
     , field "Fakturerbare dager:" (input [type_ "number", placeholder "Fakturerbare dager", value (String.fromInt model.totalDays), onInput UpdateTotalDays] [])
     , field "Timer per dag:" (input [type_ "number", placeholder "Timer per dag", value (String.fromFloat model.hoursPerDay), onInput UpdateHoursPerDay] [])
+    , divider
     , info "Konsulent omsetning: " totalEarnedCalculated
     , info "Konsulent lønnsandel: " consultantsShare
     , info "Fratrukket arbeidsgiveravgift: " consultantsShareWithoutEmployeeTax
@@ -148,6 +152,7 @@ view model =
     , info "Feriepenger: " holidayMoney
     , info "Bruttolønn før pensjon/forsikring: " consultantsShareWithoutEmployeeTaxAndHoliday
     , info "Pensjonsfratrekk inkl. arbeidsgiveravgift: " pensionShare
+    , divider
     , div [class "summary"] [
       info "Lønn  utbetalt på ett år: " (consultantsShareWithoutEmployeeTaxAndHoliday - pensionShare)
       , info "Avsatt feriepenger for neste år: " (holidayMoney)
