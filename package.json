@@ -2,19 +2,17 @@
   "name": "skatt-kalkulator",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "source": "index.html",
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "andrii",
   "license": "ISC",
   "devDependencies": {
+    "parcel": "^2.8.2",
     "@parcel/transformer-elm": "^2.8.2",
     "elm": "^0.19.1-5"
-  },
-  "dependencies": {
-    "parcel": "^2.8.2"
   }
 }
