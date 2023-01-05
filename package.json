@@ -13,5 +13,8 @@
   "devDependencies": {
     "@parcel/transformer-elm": "^2.8.2",
     "elm": "^0.19.1-5"
+  },
+  "dependencies": {
+    "parcel": "^2.8.2"
   }
 }
