@@ -116,8 +116,8 @@ totalEarned hourPrice totalDays hoursPerDay =
 
 
 
-pensionShare5to71 : Float -> Float
-pensionShare5to71 salary =
+pensionShare6to71 : Float -> Float
+pensionShare6to71 salary =
  if (salary > (6.0 * g)) then ( ( (Basics.min (7.1 * g) salary) - (6.0 * g)) * 0.05 * employeeTax ) else 0.0
 
 pensionShare71to12 : Float -> Float
@@ -136,7 +136,7 @@ view model =
     consultantsShareWithoutEmployeeTaxAndHoliday = (consultantsShareWithoutEmployeeTax / holidayPercent)
     holidayMoney = consultantsShareWithoutEmployeeTax - consultantsShareWithoutEmployeeTaxAndHoliday
     -- pensionShare = (pensionShare5to71 consultantsShareWithoutEmployeeTaxAndHoliday) + (pensionShare71to12 consultantsShareWithoutEmployeeTaxAndHoliday)
-    pensionShare = (pensionShare5to71 consultantsShare) + (pensionShare71to12 consultantsShare)
+    pensionShare = (pensionShare6to71 consultantsShareWithoutEmployeeTaxAndHoliday) + (pensionShare71to12 consultantsShareWithoutEmployeeTaxAndHoliday)
   in
   div [class "container"]
     [
