@@ -1,16 +1,9 @@
 module Main exposing (..)
 
--- Press buttons to increment and decrement a counter.
---
--- Read how it works:
---   https://guide.elm-lang.org/architecture/buttons.html
---
-
-
 import Browser
-import Html exposing (Html, button, input, div, h2, text)
+import Html exposing (Html, input, div, h2, text)
 import Html.Attributes exposing (..)
-import Html.Events exposing (onClick, onInput)
+import Html.Events exposing (onInput)
 import FormatNumber exposing (format)
 import FormatNumber.Locales exposing (usLocale, Locale)
 import FormatNumber.Locales exposing (Decimals(..))
@@ -78,7 +71,6 @@ update msg model =
 
 -- VIEW
 
--- div [] [ text ("Konsulent omsetning: " ++ (renderFloat totalEarnedCalculated)) ]
 info : String -> Float -> Html Msg
 info label money =
   div [class "info-field"] [
@@ -130,23 +122,27 @@ divider = div [class "divider"] []
 view : Model -> Html Msg
 view model =
   let
-    totalEarnedCalculated = totalEarned model.hourPrice model.totalDays  model.hoursPerDay
-    consultantsShare = (totalEarnedCalculated * percent)
+    -- we take either 6g if this is more than invoiced
+    totalEarnedCalculated = Basics.max (totalEarned model.hourPrice model.totalDays  model.hoursPerDay) (g * 6)
+    -- we take either 6g if this is more than invoiced
+    consultantsShare = Basics.max (totalEarnedCalculated * percent) (g * 6)
     consultantsShareWithoutEmployeeTax = (consultantsShare / employeeTax)
     consultantsShareWithoutEmployeeTaxAndHoliday = (consultantsShareWithoutEmployeeTax / holidayPercent)
     holidayMoney = consultantsShareWithoutEmployeeTax - consultantsShareWithoutEmployeeTaxAndHoliday
     -- pensionShare = (pensionShare5to71 consultantsShareWithoutEmployeeTaxAndHoliday) + (pensionShare71to12 consultantsShareWithoutEmployeeTaxAndHoliday)
-    pensionShare = (pensionShare6to71 consultantsShareWithoutEmployeeTaxAndHoliday) + (pensionShare71to12 consultantsShareWithoutEmployeeTaxAndHoliday)
+    pensionShare = (pensionShare6to71 consultantsShareWithoutEmployeeTax) + (pensionShare71to12 consultantsShareWithoutEmployeeTax)
   in
   div [class "container"]
     [
-      h2 [] [text "Din Skatt"]
+      h2 [] [
+        div [class "logo"] []
+        , text " Skatt"]
     , field "Timepris:" (input [type_ "number", placeholder "Timepris", value (String.fromInt model.hourPrice), onInput UpdateHourPrice] [])
     , field "Fakturerbare dager:" (input [type_ "number", placeholder "Fakturerbare dager", value (String.fromInt model.totalDays), onInput UpdateTotalDays] [])
     , field "Timer per dag:" (input [type_ "number", placeholder "Timer per dag", value (String.fromFloat model.hoursPerDay), onInput UpdateHoursPerDay] [])
     , divider
-    , info "Konsulent omsetning: " totalEarnedCalculated
-    , info "Konsulent lønnsandel: " consultantsShare
+    , info "Konsulent omsetning: " totalEarnedCalculated --(g * 6)
+    , info "Konsulent lønnsandel: " consultantsShare --(g * 6)
     , info "Fratrukket arbeidsgiveravgift: " consultantsShareWithoutEmployeeTax
     , info "Fratrukket arbeidsgiveravgift og feriepenger: " consultantsShareWithoutEmployeeTaxAndHoliday
     , info "Feriepenger: " holidayMoney

@@ -9,34 +9,57 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;900&display=swap" rel="stylesheet">
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;900&display=swap');
+
+      /*
+      @font-face{
+        font-family:"ArialforKnowitW03-Regular";
+        src:url("./Static/Fonts/ArialForKnowit/ArialforKnowitW05-Regular.eot?#iefix");
+        src:url("./Static/Fonts/ArialForKnowit/ArialforKnowitW05-Regular.eot?#iefix") format("eot"),url("./Static/Fonts/ArialForKnowit/ArialforKnowitW05-Regular.woff2") format("woff2"),url("/Static/Fonts/ArialForKnowit/ArialforKnowitW05-Regular.woff") format("woff"),url("./Static/Fonts/ArialForKnowit/ArialforKnowitW05-Regular.ttf") format("truetype")
+      }
+      @font-face{
+        font-family:"ArialforKnowitW05-Bold";
+        src:url("./Static/Fonts/ArialForKnowit/ArialforKnowitW05-Bold.eot?#iefix");
+        src:url("./Static/Fonts/ArialForKnowit/ArialforKnowitW05-Bold.eot?#iefix") format("eot"),url("./Static/Fonts/ArialForKnowit/ArialforKnowitW05-Bold.woff2") format("woff2"),url("/Static/Fonts/ArialForKnowit/ArialforKnowitW05-Bold.woff") format("woff"),url("./Static/Fonts/ArialForKnowit/ArialforKnowitW05-Bold.ttf") format("truetype")
+      }
+      */
     </style>
     <style>
       html, body {
+        color: rgb(51, 51, 51);
         height: 100%;
         width: 100%;
         margin: 0;
         padding: 0;
       }
-      body > * {
-        /* width: 100%;
+      /* body > * {
+        width: 100%;
         flex: 1;
         display: flex;
         flex-flow: column;
-        align-items: center; */
-      }
+        align-items: center; 
+      }*/
       body {
         font-family: 'Inter', sans-serif;
+        /* font-family: 'ArialforKnowitW03-Regular', sans-serif; */
         font-size: 18px;
-        font-weight: 300;
+        font-weight: 200;
 
         display: flex;
         flex-flow: column;
         align-items: center;
       }
       h2 {
+        /* font-family: "ArialforKnowitW05-Bold"; */
         text-transform: uppercase;
         font-weight: 900;
         margin-top: 18px;
+      }
+      .logo {
+        background-image: url("assets/logotype-black.svg");
+        width: 100px;
+        height: 22.6px;
+        background-repeat: round;
+        display: inline-block;
       }
       .divider {
         border-bottom-style: dashed;

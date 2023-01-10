@@ -11,8 +11,8 @@
   "author": "andrii",
   "license": "ISC",
   "devDependencies": {
-    "parcel": "^2.8.2",
     "@parcel/transformer-elm": "^2.8.2",
-    "elm": "^0.19.1-5"
+    "elm": "^0.19.1-5",
+    "parcel": "^2.8.2"
   }
 }
